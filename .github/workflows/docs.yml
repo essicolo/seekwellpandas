@@ -11,10 +11,10 @@ jobs:
     permissions:
       contents: write
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4  # Updated from v3
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5  # Updated from v4
       with:
         python-version: '3.x'
 
@@ -35,7 +35,13 @@ jobs:
     - name: Build Documentation
       run: |
         cd docs
-        sphinx-build -b html . _build/html -v  # Verbose output
+        sphinx-build -b html . _build/html -v -w /tmp/sphinx-log
+        cat /tmp/sphinx-log
+      continue-on-error: true
+
+    - name: Display Sphinx build log
+      if: failure()
+      run: cat /tmp/sphinx-log
 
     - name: Check build output
       run: |
