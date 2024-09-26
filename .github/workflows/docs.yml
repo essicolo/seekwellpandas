@@ -35,9 +35,18 @@ jobs:
     - name: Build Documentation
       run: |
         cd docs
-        sphinx-build -b html . _build/html -v -w /tmp/sphinx-log
-        cat /tmp/sphinx-log
+        make html
+        echo "Contents of _build/html directory:"
+        ls -R _build/html
       continue-on-error: true
+      
+    - name: Debug Build Output
+      if: always()
+      run: |
+        echo "Current directory:"
+        pwd
+        echo "Contents of docs/_build directory:"
+        ls -R docs/_build
 
     - name: Display Sphinx build log
       if: failure()
@@ -48,7 +57,14 @@ jobs:
         ls -R docs/_build/html
 
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs/_build/html
+        folder: docs/_build/html
+        clean: true  # Removes existing files from the branch, ensuring a clean slate
+        clean-exclude: |
+          .nojekyll
+
+    - name: Add .nojekyll file
+      run: |
+        cd docs/_build/html
+        touch .nojekyll
