@@ -16,4 +16,12 @@ documentation for details.
    :caption: Contents:
 
    api
-   examples/basic-usage
+   _examples/basic-usage
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

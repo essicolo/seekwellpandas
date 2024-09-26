@@ -9,6 +9,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
+print("Python path:", sys.path)
 
 project = 'pandalchemy'
 copyright = '2024, Essi Parent'
