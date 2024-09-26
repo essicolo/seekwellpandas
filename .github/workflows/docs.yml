@@ -24,6 +24,7 @@ jobs:
         pip install sphinx sphinx_rtd_theme nbsphinx
         pip install .
         pip freeze
+        sudo apt-get install pandoc
 
     - name: Debug environment
       run: |
