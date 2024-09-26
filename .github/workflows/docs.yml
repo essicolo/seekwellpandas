@@ -3,7 +3,7 @@ name: Build and Deploy Sphinx Documentation
 on:
   push:
     branches:
-      - main  # or your default branch
+      - main
 
 jobs:
   build-and-deploy:
@@ -11,10 +11,10 @@ jobs:
     permissions:
       contents: write
     steps:
-    - uses: actions/checkout@v4  # Updated from v3
+    - uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v5  # Updated from v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.x'
 
