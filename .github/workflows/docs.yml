@@ -3,23 +3,25 @@ name: Build and Deploy Sphinx Documentation
 on:
   push:
     branches:
-      - main  # or your default branch name
+      - main  # ou le nom de votre branche principale
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.x'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install sphinx sphinx_rtd_theme
+        pip install sphinx sphinx_rtd_theme nbsphinx
 
     - name: Build Documentation
       run: |
