@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pandalchemy: Basic Usage &mdash; pandalchemy 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            pandalchemy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pandalchemy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Pandalchemy: Basic Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_examples/basic-usage.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Pandalchemy:-Basic-Usage">
+<h1>Pandalchemy: Basic Usage<a class="headerlink" href="#Pandalchemy:-Basic-Usage" title="Link to this heading"></a></h1>
+<p>This notebook demonstrates the basic usage of the Pandalchemy library, which extends pandas with SQL-like functionality.</p>
+<section id="Setup">
+<h2>Setup<a class="headerlink" href="#Setup" title="Link to this heading"></a></h2>
+<p>First, let’s import the necessary libraries and create some sample data.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+import pandalchemy as pa
+
+# Create sample data
+people = pd.DataFrame({
+    &#39;id&#39;: range(1, 11),
+    &#39;name&#39;: [&#39;Alice&#39;, &#39;Bob&#39;, &#39;Charlie&#39;, &#39;David&#39;, &#39;Eve&#39;, &#39;Frank&#39;, &#39;Grace&#39;, &#39;Henry&#39;, &#39;Ivy&#39;, &#39;Jack&#39;],
+    &#39;age&#39;: [25, 30, 35, 28, 22, 40, 33, 45, 27, 31],
+    &#39;city&#39;: [&#39;New York&#39;, &#39;London&#39;, &#39;Paris&#39;, &#39;Tokyo&#39;, &#39;Sydney&#39;, &#39;Berlin&#39;, &#39;Moscow&#39;, &#39;Rome&#39;, &#39;Madrid&#39;, &#39;Toronto&#39;]
+})
+people
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>city</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Alice</td>
+      <td>25</td>
+      <td>New York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Bob</td>
+      <td>30</td>
+      <td>London</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Paris</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>David</td>
+      <td>28</td>
+      <td>Tokyo</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Eve</td>
+      <td>22</td>
+      <td>Sydney</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>Frank</td>
+      <td>40</td>
+      <td>Berlin</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>Grace</td>
+      <td>33</td>
+      <td>Moscow</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>Henry</td>
+      <td>45</td>
+      <td>Rome</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>Ivy</td>
+      <td>27</td>
+      <td>Madrid</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>Jack</td>
+      <td>31</td>
+      <td>Toronto</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Basic-Operations">
+<h2>Basic Operations<a class="headerlink" href="#Basic-Operations" title="Link to this heading"></a></h2>
+<section id="Select">
+<h3>Select<a class="headerlink" href="#Select" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">select</span></code> method allows you to choose specific columns from the DataFrame.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>people.select(&#39;name&#39;, &#39;age&#39;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>David</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Eve</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Frank</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Grace</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Henry</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Ivy</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Jack</td>
+      <td>31</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Where">
+<h3>Where<a class="headerlink" href="#Where" title="Link to this heading"></a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">where</span></code> to filter rows based on a condition.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>people.where_(&#39;age &gt; 30&#39;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>city</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Paris</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>Frank</td>
+      <td>40</td>
+      <td>Berlin</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>Grace</td>
+      <td>33</td>
+      <td>Moscow</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>Henry</td>
+      <td>45</td>
+      <td>Rome</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>Jack</td>
+      <td>31</td>
+      <td>Toronto</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Group-By">
+<h3>Group By<a class="headerlink" href="#Group-By" title="Link to this heading"></a></h3>
+<p>Group the data by a specific column.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>people.group_by(&#39;city&#39;).agg({&#39;age&#39;: &#39;mean&#39;})
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+    </tr>
+    <tr>
+      <th>city</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Berlin</th>
+      <td>40.0</td>
+    </tr>
+    <tr>
+      <th>London</th>
+      <td>30.0</td>
+    </tr>
+    <tr>
+      <th>Madrid</th>
+      <td>27.0</td>
+    </tr>
+    <tr>
+      <th>Moscow</th>
+      <td>33.0</td>
+    </tr>
+    <tr>
+      <th>New York</th>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>Paris</th>
+      <td>35.0</td>
+    </tr>
+    <tr>
+      <th>Rome</th>
+      <td>45.0</td>
+    </tr>
+    <tr>
+      <th>Sydney</th>
+      <td>22.0</td>
+    </tr>
+    <tr>
+      <th>Tokyo</th>
+      <td>28.0</td>
+    </tr>
+    <tr>
+      <th>Toronto</th>
+      <td>31.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Order-By">
+<h3>Order By<a class="headerlink" href="#Order-By" title="Link to this heading"></a></h3>
+<p>Sort the DataFrame based on one or more columns.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>people.order_by(&#39;age&#39;, ascending=False)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>city</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>Henry</td>
+      <td>45</td>
+      <td>Rome</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>Frank</td>
+      <td>40</td>
+      <td>Berlin</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Paris</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>Grace</td>
+      <td>33</td>
+      <td>Moscow</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>Jack</td>
+      <td>31</td>
+      <td>Toronto</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Bob</td>
+      <td>30</td>
+      <td>London</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>David</td>
+      <td>28</td>
+      <td>Tokyo</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>Ivy</td>
+      <td>27</td>
+      <td>Madrid</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Alice</td>
+      <td>25</td>
+      <td>New York</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Eve</td>
+      <td>22</td>
+      <td>Sydney</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Limit">
+<h3>Limit<a class="headerlink" href="#Limit" title="Link to this heading"></a></h3>
+<p>Limit the number of rows returned.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>people.order_by(&#39;age&#39;).limit(5)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>city</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Eve</td>
+      <td>22</td>
+      <td>Sydney</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Alice</td>
+      <td>25</td>
+      <td>New York</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>Ivy</td>
+      <td>27</td>
+      <td>Madrid</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>David</td>
+      <td>28</td>
+      <td>Tokyo</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Bob</td>
+      <td>30</td>
+      <td>London</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+<section id="Advanced-Operations">
+<h2>Advanced Operations<a class="headerlink" href="#Advanced-Operations" title="Link to this heading"></a></h2>
+<section id="Join">
+<h3>Join<a class="headerlink" href="#Join" title="Link to this heading"></a></h3>
+<p>Demonstrate joining two DataFrames.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>countries = pd.DataFrame({
+    &#39;city&#39;: [&#39;New York&#39;, &#39;London&#39;, &#39;Paris&#39;, &#39;Tokyo&#39;, &#39;Sydney&#39;],
+    &#39;country&#39;: [&#39;USA&#39;, &#39;UK&#39;, &#39;France&#39;, &#39;Japan&#39;, &#39;Australia&#39;]
+})
+
+people.join_(countries, on=&#39;city&#39;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>city</th>
+      <th>country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Alice</td>
+      <td>25</td>
+      <td>New York</td>
+      <td>USA</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Bob</td>
+      <td>30</td>
+      <td>London</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Paris</td>
+      <td>France</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>David</td>
+      <td>28</td>
+      <td>Tokyo</td>
+      <td>Japan</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Eve</td>
+      <td>22</td>
+      <td>Sydney</td>
+      <td>Australia</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Union">
+<h3>Union<a class="headerlink" href="#Union" title="Link to this heading"></a></h3>
+<p>Combine two DataFrames vertically.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>other_people = pd.DataFrame({
+    &#39;id&#39;: range(11, 16),
+    &#39;name&#39;: [&#39;Karen&#39;, &#39;Leo&#39;, &#39;Mike&#39;, &#39;Nina&#39;, &#39;Oscar&#39;],
+    &#39;age&#39;: [29, 36, 41, 24, 38],
+    &#39;city&#39;: [&#39;Chicago&#39;, &#39;Dublin&#39;, &#39;Amsterdam&#39;, &#39;Oslo&#39;, &#39;Stockholm&#39;]
+})
+all_people = people.union(other_people)
+all_people
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>city</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Alice</td>
+      <td>25</td>
+      <td>New York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Bob</td>
+      <td>30</td>
+      <td>London</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Paris</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>David</td>
+      <td>28</td>
+      <td>Tokyo</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Eve</td>
+      <td>22</td>
+      <td>Sydney</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>Frank</td>
+      <td>40</td>
+      <td>Berlin</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>Grace</td>
+      <td>33</td>
+      <td>Moscow</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>Henry</td>
+      <td>45</td>
+      <td>Rome</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>Ivy</td>
+      <td>27</td>
+      <td>Madrid</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>Jack</td>
+      <td>31</td>
+      <td>Toronto</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>Karen</td>
+      <td>29</td>
+      <td>Chicago</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>Leo</td>
+      <td>36</td>
+      <td>Dublin</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>Mike</td>
+      <td>41</td>
+      <td>Amsterdam</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>Nina</td>
+      <td>24</td>
+      <td>Oslo</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>Oscar</td>
+      <td>38</td>
+      <td>Stockholm</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="With-Column">
+<h3>With Column<a class="headerlink" href="#With-Column" title="Link to this heading"></a></h3>
+<p>Add a new column based on an expression.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>all_people.with_column(&#39;age_group&#39;, &#39;age // 10 * 10&#39;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>city</th>
+      <th>age_group</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Alice</td>
+      <td>25</td>
+      <td>New York</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Bob</td>
+      <td>30</td>
+      <td>London</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Paris</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>David</td>
+      <td>28</td>
+      <td>Tokyo</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Eve</td>
+      <td>22</td>
+      <td>Sydney</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>Frank</td>
+      <td>40</td>
+      <td>Berlin</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>Grace</td>
+      <td>33</td>
+      <td>Moscow</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>Henry</td>
+      <td>45</td>
+      <td>Rome</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>Ivy</td>
+      <td>27</td>
+      <td>Madrid</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>Jack</td>
+      <td>31</td>
+      <td>Toronto</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>Karen</td>
+      <td>29</td>
+      <td>Chicago</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>Leo</td>
+      <td>36</td>
+      <td>Dublin</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>Mike</td>
+      <td>41</td>
+      <td>Amsterdam</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>Nina</td>
+      <td>24</td>
+      <td>Oslo</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>Oscar</td>
+      <td>38</td>
+      <td>Stockholm</td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Rename-Column">
+<h3>Rename Column<a class="headerlink" href="#Rename-Column" title="Link to this heading"></a></h3>
+<p>Rename an existing column.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>all_people.rename_column(&#39;city&#39;, &#39;location&#39;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>location</th>
+      <th>age_group</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Alice</td>
+      <td>25</td>
+      <td>New York</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Bob</td>
+      <td>30</td>
+      <td>London</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Paris</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>David</td>
+      <td>28</td>
+      <td>Tokyo</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Eve</td>
+      <td>22</td>
+      <td>Sydney</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>Frank</td>
+      <td>40</td>
+      <td>Berlin</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>Grace</td>
+      <td>33</td>
+      <td>Moscow</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>Henry</td>
+      <td>45</td>
+      <td>Rome</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>Ivy</td>
+      <td>27</td>
+      <td>Madrid</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>Jack</td>
+      <td>31</td>
+      <td>Toronto</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>Karen</td>
+      <td>29</td>
+      <td>Chicago</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>Leo</td>
+      <td>36</td>
+      <td>Dublin</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>Mike</td>
+      <td>41</td>
+      <td>Amsterdam</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>Nina</td>
+      <td>24</td>
+      <td>Oslo</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>Oscar</td>
+      <td>38</td>
+      <td>Stockholm</td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Essi Parent.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
