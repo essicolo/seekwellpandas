@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      actions: write
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
@@ -22,12 +21,6 @@ jobs:
         pip install .
         pip freeze
         sudo apt-get install pandoc
-    - name: Debug environment
-      run: |
-        pwd
-        ls -R
-        python -c "import seekwellpandas; print(seekwellpandas.__file__)"
-        python -c "from seekwellpandas import methods; print(methods.__file__)"
     - name: Build Documentation
       run: |
         cd docs
@@ -35,47 +28,13 @@ jobs:
         echo "Contents of _build/html directory:"
         ls -R _build/html
       continue-on-error: true
-    - name: Debug Build Output
-      if: always()
-      run: |
-        echo "Current directory:"
-        pwd
-        echo "Contents of docs/_build directory:"
-        ls -R docs/_build
-    - name: Display Sphinx build log
-      if: failure()
-      run: cat /tmp/sphinx-log
     - name: Check build output
       run: |
         ls -R docs/_build/html
-    - name: Clean GitHub Actions Cache
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Clean Actions cache
       run: |
-        gh extension install actions/gh-actions-cache
-        
-        REPO=${{ github.repository }}
-        BRANCH="refs/heads/main"
-
-        echo "Fetching list of cache key"
-        cacheKeysForPR=$(gh actions-cache list -R $REPO -B $BRANCH | cut -f 1 )
-
-        ## Setting this to not fail the workflow while deleting cache keys.
-        set +e
-        echo "Deleting caches..."
-        for cacheKey in $cacheKeysForPR
-        do
-            gh actions-cache delete $cacheKey -R $REPO -B $BRANCH --confirm
-        done
-        echo "Done"
+        rm -rf $GITHUB_WORKSPACE/.github/workflows/.cache
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4.6.6
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: docs/_build/html
-        clean: true  # Removes existing files from the branch, ensuring a clean slate
-        clean-exclude: |
-          .nojekyll
-    - name: Add .nojekyll file
-      run: |
-        cd docs/_build/html
-        touch .nojekyll
