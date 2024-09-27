@@ -69,7 +69,7 @@ jobs:
         done
         echo "Done"
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4
+      uses: JamesIves/github-pages-deploy-action@v4.6.6
       with:
         folder: docs/_build/html
         clean: true  # Removes existing files from the branch, ensuring a clean slate
