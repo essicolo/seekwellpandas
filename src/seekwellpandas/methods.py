@@ -113,7 +113,7 @@ def having(df, condition):
         raise ValueError("having can only be used after group_by")
 
 @pf.register_dataframe_method
-def order_by(df, column, ascending=True):
+def order_by(df, columns, ascending=True):
     """
     Sort the DataFrame by specific columns.
 
@@ -125,6 +125,8 @@ def order_by(df, column, ascending=True):
     Returns:
     pd.DataFrame: A sorted DataFrame.
     """
+    if not isinstance(columns, list):
+        columns = [columns]
     sort_columns = []
     for col in columns:
         if isinstance(col, list):
