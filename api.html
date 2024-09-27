@@ -48,17 +48,6 @@ pd.DataFrame: The DataFrame with the casted column.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="seekwellpandas.methods.create_view">
-<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">create_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.create_view" title="Link to this definition">¶</a></dt>
-<dd><p>Create a global view of the DataFrame.</p>
-<p>Parameters:
-df (pd.DataFrame): The DataFrame to create a view of.
-name (str): The name of the view.</p>
-<p>Returns:
-pd.DataFrame: The original DataFrame.</p>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="seekwellpandas.methods.difference">
 <span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.difference" title="Link to this definition">¶</a></dt>
 <dd><p>Find the difference between two DataFrames.</p>
@@ -96,7 +85,7 @@ pd.DataFrame: A DataFrame with the specified columns dropped.</p>
 <dd><p>Group the DataFrame by specific columns.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to group.
-<a href="#id3"><span class="problematic" id="id4">*</span></a>columns (str): The columns to group by.</p>
+<a href="#id3"><span class="problematic" id="id4">*</span></a>columns (str or list): The columns to group by. Can be strings or lists.</p>
 <p>Returns:
 pd.core.groupby.DataFrameGroupBy: A grouped DataFrame.</p>
 </dd></dl>
@@ -157,11 +146,11 @@ pd.DataFrame: A DataFrame with the limited number of rows.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="seekwellpandas.methods.order_by">
 <span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">order_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.order_by" title="Link to this definition">¶</a></dt>
-<dd><p>Sort the DataFrame by a specific column.</p>
+<dd><p>Sort the DataFrame by specific columns.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to sort.
-column (str): The column to sort by.
-ascending (bool): Whether to sort in ascending order. Default is True.</p>
+<a href="#id5"><span class="problematic" id="id6">*</span></a>columns (str or list): The columns to sort by. Can be strings or lists.
+ascending (bool or list): Whether to sort in ascending order. Can be a single boolean or a list.</p>
 <p>Returns:
 pd.DataFrame: A sorted DataFrame.</p>
 </dd></dl>
@@ -181,10 +170,13 @@ pd.DataFrame: The DataFrame with the renamed column.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="seekwellpandas.methods.select">
 <span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.select" title="Link to this definition">¶</a></dt>
-<dd><p>Select specific columns from the DataFrame.</p>
+<dd><p>Select specific columns from the DataFrame, including negative selection.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to select columns from.
-<a href="#id5"><span class="problematic" id="id6">*</span></a>columns (str): The columns to select.</p>
+<a href="#id7"><span class="problematic" id="id8">*</span></a>columns (str or list): The columns to select. Can be strings or lists.</p>
+<blockquote>
+<div><p>Prefix column names with ‘-’ for negative selection.</p>
+</div></blockquote>
 <p>Returns:
 pd.DataFrame: A DataFrame with the selected columns.</p>
 </dd></dl>
@@ -220,7 +212,7 @@ pd.DataFrame: An unpivoted DataFrame.</p>
 <dd><p>Filter the DataFrame based on a condition.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to filter.
-condition (str): The condition to filter by.</p>
+condition (str or list): The condition(s) to filter by. Can be a string or a list of strings.</p>
 <p>Returns:
 pd.DataFrame: A filtered DataFrame.</p>
 </dd></dl>
@@ -263,7 +255,6 @@ pd.DataFrame: The DataFrame with the new column added.</p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.cast"><code class="docutils literal notranslate"><span class="pre">cast()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.create_view"><code class="docutils literal notranslate"><span class="pre">create_view()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.difference"><code class="docutils literal notranslate"><span class="pre">difference()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.distinct"><code class="docutils literal notranslate"><span class="pre">distinct()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.drop_column"><code class="docutils literal notranslate"><span class="pre">drop_column()</span></code></a></li>
