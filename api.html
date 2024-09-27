@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>API Reference &#8212; pandalchemy 0.1.0 documentation</title>
+    <title>API Reference &#8212; seekwellpandas 0.1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
     <script src="_static/documentation_options.js?v=01f34227"></script>
@@ -14,8 +14,8 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Pandalchemy: Basic Usage" href="_examples/basic-usage.html" />
-    <link rel="prev" title="Installation" href="installation.html" />
+    <link rel="next" title="seekwellpandas: Basic Usage" href="_examples/basic-usage.html" />
+    <link rel="prev" title="Welcome to seekwellpandas’s documentation!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,11 +33,11 @@
 
           <div class="body" role="main">
             
-  <section id="module-pandalchemy.methods">
-<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-pandalchemy.methods" title="Link to this heading">¶</a></h1>
+  <section id="module-seekwellpandas.methods">
+<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-seekwellpandas.methods" title="Link to this heading">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.cast">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">cast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.cast" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.cast">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">cast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.cast" title="Link to this definition">¶</a></dt>
 <dd><p>Cast a column to a different data type.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to cast the column in.
@@ -48,8 +48,8 @@ pd.DataFrame: The DataFrame with the casted column.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.create_view">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">create_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.create_view" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.create_view">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">create_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.create_view" title="Link to this definition">¶</a></dt>
 <dd><p>Create a global view of the DataFrame.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to create a view of.
@@ -59,8 +59,8 @@ pd.DataFrame: The original DataFrame.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.difference">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.difference" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.difference">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.difference" title="Link to this definition">¶</a></dt>
 <dd><p>Find the difference between two DataFrames.</p>
 <p>Parameters:
 df (pd.DataFrame): The first DataFrame.
@@ -70,8 +70,8 @@ pd.DataFrame: The difference between the two DataFrames.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.distinct">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">distinct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.distinct" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.distinct">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">distinct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.distinct" title="Link to this definition">¶</a></dt>
 <dd><p>Remove duplicate rows from the DataFrame.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to remove duplicates from.</p>
@@ -80,8 +80,8 @@ pd.DataFrame: A DataFrame with duplicate rows removed.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.drop_column">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">drop_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.drop_column" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.drop_column">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">drop_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.drop_column" title="Link to this definition">¶</a></dt>
 <dd><p>Drop specific columns from the DataFrame.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to drop columns from.
@@ -91,8 +91,8 @@ pd.DataFrame: A DataFrame with the specified columns dropped.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.group_by">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">group_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.group_by" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.group_by">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">group_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.group_by" title="Link to this definition">¶</a></dt>
 <dd><p>Group the DataFrame by specific columns.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to group.
@@ -102,13 +102,13 @@ pd.core.groupby.DataFrameGroupBy: A grouped DataFrame.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.group_having">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">group_having</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groupby_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">having_condition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.group_having" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.group_having">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">group_having</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groupby_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">having_condition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.group_having" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.having">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">having</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.having" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.having">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">having</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.having" title="Link to this definition">¶</a></dt>
 <dd><p>Filter groups in the DataFrame based on a condition.</p>
 <p>Parameters:
 df (pd.core.groupby.GroupBy): The grouped DataFrame to filter.
@@ -120,8 +120,8 @@ ValueError: If the DataFrame is not grouped.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.intersect">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">intersect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.intersect" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.intersect">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">intersect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.intersect" title="Link to this definition">¶</a></dt>
 <dd><p>Intersect two DataFrames.</p>
 <p>Parameters:
 df (pd.DataFrame): The first DataFrame.
@@ -131,8 +131,8 @@ pd.DataFrame: The intersection of the two DataFrames.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.join_">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">join_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">how</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inner'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.join_" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.join_">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">join_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">how</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inner'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.join_" title="Link to this definition">¶</a></dt>
 <dd><p>Join two DataFrames.</p>
 <p>Parameters:
 df (pd.DataFrame): The first DataFrame.
@@ -144,8 +144,8 @@ pd.DataFrame: The joined DataFrame.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.limit">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.limit" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.limit">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.limit" title="Link to this definition">¶</a></dt>
 <dd><p>Limit the number of rows in the DataFrame.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to limit.
@@ -155,8 +155,8 @@ pd.DataFrame: A DataFrame with the limited number of rows.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.order_by">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">order_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.order_by" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.order_by">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">order_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.order_by" title="Link to this definition">¶</a></dt>
 <dd><p>Sort the DataFrame by a specific column.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to sort.
@@ -167,8 +167,8 @@ pd.DataFrame: A sorted DataFrame.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.rename_column">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">rename_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.rename_column" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.rename_column">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">rename_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.rename_column" title="Link to this definition">¶</a></dt>
 <dd><p>Rename a column in the DataFrame.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to rename the column in.
@@ -179,8 +179,8 @@ pd.DataFrame: The DataFrame with the renamed column.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.select">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.select" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.select">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.select" title="Link to this definition">¶</a></dt>
 <dd><p>Select specific columns from the DataFrame.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to select columns from.
@@ -190,8 +190,8 @@ pd.DataFrame: A DataFrame with the selected columns.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.union">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.union" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.union">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.union" title="Link to this definition">¶</a></dt>
 <dd><p>Union two DataFrames.</p>
 <p>Parameters:
 df (pd.DataFrame): The first DataFrame.
@@ -201,8 +201,8 @@ pd.DataFrame: The union of the two DataFrames.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.unpivot">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">unpivot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_vars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_vars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.unpivot" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.unpivot">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">unpivot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_vars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_vars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.unpivot" title="Link to this definition">¶</a></dt>
 <dd><p>Unpivot the DataFrame.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to unpivot.
@@ -215,8 +215,8 @@ pd.DataFrame: An unpivoted DataFrame.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.where_">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">where_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.where_" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.where_">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">where_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.where_" title="Link to this definition">¶</a></dt>
 <dd><p>Filter the DataFrame based on a condition.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to filter.
@@ -226,8 +226,8 @@ pd.DataFrame: A filtered DataFrame.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pandalchemy.methods.with_column">
-<span class="sig-prename descclassname"><span class="pre">pandalchemy.methods.</span></span><span class="sig-name descname"><span class="pre">with_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expression</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandalchemy.methods.with_column" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="seekwellpandas.methods.with_column">
+<span class="sig-prename descclassname"><span class="pre">seekwellpandas.methods.</span></span><span class="sig-name descname"><span class="pre">with_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expression</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#seekwellpandas.methods.with_column" title="Link to this definition">¶</a></dt>
 <dd><p>Add a new column to the DataFrame based on an expression.</p>
 <p>Parameters:
 df (pd.DataFrame): The DataFrame to add the column to.
@@ -247,9 +247,9 @@ pd.DataFrame: The DataFrame with the new column added.</p>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/logo.png" alt="Logo of pandalchemy"/>
+              <img class="logo" src="_static/logo.png" alt="Logo of seekwellpandas"/>
             </a></p>
-<h1 class="logo"><a href="index.html">pandalchemy</a></h1>
+<h1 class="logo"><a href="index.html">seekwellpandas</a></h1>
 
 
 
@@ -261,37 +261,36 @@ pd.DataFrame: The DataFrame with the new column added.</p>
 <h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.cast"><code class="docutils literal notranslate"><span class="pre">cast()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.create_view"><code class="docutils literal notranslate"><span class="pre">create_view()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.difference"><code class="docutils literal notranslate"><span class="pre">difference()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.distinct"><code class="docutils literal notranslate"><span class="pre">distinct()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.drop_column"><code class="docutils literal notranslate"><span class="pre">drop_column()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.group_by"><code class="docutils literal notranslate"><span class="pre">group_by()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.group_having"><code class="docutils literal notranslate"><span class="pre">group_having()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.having"><code class="docutils literal notranslate"><span class="pre">having()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.intersect"><code class="docutils literal notranslate"><span class="pre">intersect()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.join_"><code class="docutils literal notranslate"><span class="pre">join_()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.limit"><code class="docutils literal notranslate"><span class="pre">limit()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.order_by"><code class="docutils literal notranslate"><span class="pre">order_by()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.rename_column"><code class="docutils literal notranslate"><span class="pre">rename_column()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.select"><code class="docutils literal notranslate"><span class="pre">select()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.union"><code class="docutils literal notranslate"><span class="pre">union()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.unpivot"><code class="docutils literal notranslate"><span class="pre">unpivot()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.where_"><code class="docutils literal notranslate"><span class="pre">where_()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pandalchemy.methods.with_column"><code class="docutils literal notranslate"><span class="pre">with_column()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.cast"><code class="docutils literal notranslate"><span class="pre">cast()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.create_view"><code class="docutils literal notranslate"><span class="pre">create_view()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.difference"><code class="docutils literal notranslate"><span class="pre">difference()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.distinct"><code class="docutils literal notranslate"><span class="pre">distinct()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.drop_column"><code class="docutils literal notranslate"><span class="pre">drop_column()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.group_by"><code class="docutils literal notranslate"><span class="pre">group_by()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.group_having"><code class="docutils literal notranslate"><span class="pre">group_having()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.having"><code class="docutils literal notranslate"><span class="pre">having()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.intersect"><code class="docutils literal notranslate"><span class="pre">intersect()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.join_"><code class="docutils literal notranslate"><span class="pre">join_()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.limit"><code class="docutils literal notranslate"><span class="pre">limit()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.order_by"><code class="docutils literal notranslate"><span class="pre">order_by()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.rename_column"><code class="docutils literal notranslate"><span class="pre">rename_column()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.select"><code class="docutils literal notranslate"><span class="pre">select()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.union"><code class="docutils literal notranslate"><span class="pre">union()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.unpivot"><code class="docutils literal notranslate"><span class="pre">unpivot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.where_"><code class="docutils literal notranslate"><span class="pre">where_()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seekwellpandas.methods.with_column"><code class="docutils literal notranslate"><span class="pre">with_column()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="_examples/basic-usage.html">Pandalchemy: Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_examples/basic-usage.html">seekwellpandas: Basic Usage</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
-      <li>Next: <a href="_examples/basic-usage.html" title="next chapter">Pandalchemy: Basic Usage</a></li>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to seekwellpandas’s documentation!</a></li>
+      <li>Next: <a href="_examples/basic-usage.html" title="next chapter">seekwellpandas: Basic Usage</a></li>
   </ul></li>
 </ul>
 </div>
