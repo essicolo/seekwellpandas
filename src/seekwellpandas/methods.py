@@ -286,21 +286,23 @@ def drop_column(df, *columns):
     return df.drop(columns=list(columns))
 
 @pf.register_dataframe_method
-def unpivot(df, id_vars, value_vars, var_name, value_name):
+def unpivot(df, *args, **kwargs):
     """
-    Unpivot the DataFrame.
+    Unpivot the DataFrame. This is a direct bridge to pandas' melt function.
+
+    All arguments are passed directly to pandas.melt().
 
     Parameters:
     df (pd.DataFrame): The DataFrame to unpivot.
-    id_vars (str or list): The column(s) to use as identifier variables.
-    value_vars (str or list): The column(s) to unpivot.
-    var_name (str): The name of the variable column.
-    value_name (str): The name of the value column.
+    *args, **kwargs: Arguments to pass to pandas.melt().
 
     Returns:
     pd.DataFrame: An unpivoted DataFrame.
+
+    See pandas.melt() documentation for full details on parameters:
+    https://pandas.pydata.org/docs/reference/api/pandas.melt.html
     """
-    return df.melt(id_vars=id_vars, value_vars=value_vars, var_name=var_name, value_name=value_name)
+    return df.melt(*args, **kwargs)
 
 # Méthode spécifique pour les groupby
 @pf.register_dataframe_method
