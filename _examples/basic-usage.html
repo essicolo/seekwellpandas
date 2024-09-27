@@ -200,60 +200,162 @@ people
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>name</th>
       <th>age</th>
+      <th>name</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Alice</td>
       <td>25</td>
+      <td>Alice</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Bob</td>
       <td>30</td>
+      <td>Bob</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Charlie</td>
       <td>35</td>
+      <td>Charlie</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>David</td>
       <td>28</td>
+      <td>David</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Eve</td>
       <td>22</td>
+      <td>Eve</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Frank</td>
       <td>40</td>
+      <td>Frank</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>Grace</td>
       <td>33</td>
+      <td>Grace</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>Henry</td>
       <td>45</td>
+      <td>Henry</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>Ivy</td>
       <td>27</td>
+      <td>Ivy</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>Jack</td>
       <td>31</td>
+      <td>Jack</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Negative selections are also supported.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>people.select(&#39;-id&#39;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>city</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>25</td>
+      <td>New York</td>
+      <td>Alice</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>30</td>
+      <td>London</td>
+      <td>Bob</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>35</td>
+      <td>Paris</td>
+      <td>Charlie</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>28</td>
+      <td>Tokyo</td>
+      <td>David</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>22</td>
+      <td>Sydney</td>
+      <td>Eve</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>40</td>
+      <td>Berlin</td>
+      <td>Frank</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>33</td>
+      <td>Moscow</td>
+      <td>Grace</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>45</td>
+      <td>Rome</td>
+      <td>Henry</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>27</td>
+      <td>Madrid</td>
+      <td>Ivy</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>31</td>
+      <td>Toronto</td>
+      <td>Jack</td>
     </tr>
   </tbody>
 </table>
@@ -264,7 +366,7 @@ people
 <h3>Where<a class="headerlink" href="#Where" title="Link to this heading">¶</a></h3>
 <p>Use <code class="docutils literal notranslate"><span class="pre">where</span></code> to filter rows based on a condition.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>people.where_(&#39;age &gt; 30&#39;)
@@ -272,7 +374,7 @@ people
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -345,7 +447,7 @@ people
 <h3>Group By<a class="headerlink" href="#Group-By" title="Link to this heading">¶</a></h3>
 <p>Group the data by a specific column.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>people.group_by(&#39;city&#39;).agg({&#39;age&#39;: &#39;mean&#39;})
@@ -353,7 +455,7 @@ people
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -432,7 +534,7 @@ people
 <h3>Order By<a class="headerlink" href="#Order-By" title="Link to this heading">¶</a></h3>
 <p>Sort the DataFrame based on one or more columns.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>people.order_by(&#39;age&#39;, ascending=False)
@@ -440,108 +542,37 @@ people
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
-</pre></div>
+<div class="prompt empty docutils container">
 </div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[6], line 1</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span> <span class="ansi-yellow-bg">people</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">order_by</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">age</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">ascending</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg ansi-bold" style="color: rgb(0,135,0)">False</span><span class="ansi-yellow-bg">)</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+File <span class="ansi-green-intense-fg ansi-bold">c:\Users\parse01\documents locaux\GitHub\seekwellpandas\.venv\Lib\site-packages\pandas_flavor\register.py:157</span>, in <span class="ansi-cyan-fg">register_dataframe_method.&lt;locals&gt;.inner.&lt;locals&gt;.AccessorMethod.__call__</span><span class="ansi-blue-intense-fg ansi-bold">(self, *args, **kwargs)</span>
+<span class="ansi-green-fg">    155</span> <span class="ansi-bold" style="color: rgb(0,135,0)">global</span> method_call_ctx_factory
+<span class="ansi-green-fg">    156</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> method_call_ctx_factory <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 157</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">method</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_obj</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    159</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> handle_pandas_extension_call(
+<span class="ansi-green-fg">    160</span>     method, method_signature, <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_obj, args, kwargs
+<span class="ansi-green-fg">    161</span> )
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>name</th>
-      <th>age</th>
-      <th>city</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>7</th>
-      <td>8</td>
-      <td>Henry</td>
-      <td>45</td>
-      <td>Rome</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>6</td>
-      <td>Frank</td>
-      <td>40</td>
-      <td>Berlin</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>Charlie</td>
-      <td>35</td>
-      <td>Paris</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>7</td>
-      <td>Grace</td>
-      <td>33</td>
-      <td>Moscow</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>10</td>
-      <td>Jack</td>
-      <td>31</td>
-      <td>Toronto</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>Bob</td>
-      <td>30</td>
-      <td>London</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>David</td>
-      <td>28</td>
-      <td>Tokyo</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>9</td>
-      <td>Ivy</td>
-      <td>27</td>
-      <td>Madrid</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Alice</td>
-      <td>25</td>
-      <td>New York</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>Eve</td>
-      <td>22</td>
-      <td>Sydney</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
+File <span class="ansi-green-intense-fg ansi-bold">~\documents locaux\GitHub\seekwellpandas\src\seekwellpandas\methods.py:129</span>, in <span class="ansi-cyan-fg">order_by</span><span class="ansi-blue-intense-fg ansi-bold">(df, column, ascending)</span>
+<span class="ansi-green-fg">    117</span> <span style="color: rgb(175,0,0)">&#34;&#34;&#34;</span>
+<span class="ansi-green-fg">    118</span> <span style="color: rgb(175,0,0)">Sort the DataFrame by specific columns.</span>
+<span class="ansi-green-fg">    119</span>
+<span class="ansi-green-intense-fg ansi-bold">   (...)</span>
+<span class="ansi-green-fg">    126</span> <span style="color: rgb(175,0,0)">pd.DataFrame: A sorted DataFrame.</span>
+<span class="ansi-green-fg">    127</span> <span style="color: rgb(175,0,0)">&#34;&#34;&#34;</span>
+<span class="ansi-green-fg">    128</span> sort_columns <span style="color: rgb(98,98,98)">=</span> []
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 129</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> col <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> <span class="ansi-yellow-bg">columns</span>:
+<span class="ansi-green-fg">    130</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">isinstance</span>(col, <span style="color: rgb(0,135,0)">list</span>):
+<span class="ansi-green-fg">    131</span>         sort_columns<span style="color: rgb(98,98,98)">.</span>extend(col)
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;columns&#39; is not defined
+</pre></div></div>
 </div>
 </section>
 <section id="Limit">

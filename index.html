@@ -36,7 +36,27 @@
             
   <section id="welcome-to-seekwellpandas-s-documentation">
 <h1>Welcome to seekwellpandas’s documentation!<a class="headerlink" href="#welcome-to-seekwellpandas-s-documentation" title="Link to this heading">¶</a></h1>
-<p>seekwellpandas (SQL-pandas) is a simple Python package that provides methods to query pandas DataFrames using a SQL-like synthax.</p>
+<p>🐼🔬 Seek well, pandas! <cite>seekwellpandas</cite> (SQL-pandas) is a simple Python package that provides extensions to query pandas DataFrames using a SQL-like synthax.</p>
+<section id="install">
+<h2>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h2>
+<p><cite>pip install seekwellpandas</cite>.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>python
+import pandas as pd
+import seekwellpandas</p>
+<p># Create a sample DataFrame
+df = pd.DataFrame({</p>
+<blockquote>
+<div><p>‘A’: [1, 2, 3, 4],
+‘B’: [‘a’, ‘b’, ‘a’, ‘b’],
+‘C’: [10, 20, 30, 40]</p>
+</div></blockquote>
+<p>})</p>
+<p># Select columns
+result = df.select(‘A’, ‘B’)
+<a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -68,6 +88,7 @@
 </li>
 </ul>
 </div>
+</section>
 </section>
 
 
