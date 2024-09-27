@@ -39,24 +39,45 @@
 <p>🐼🔬 Seek well, pandas! <cite>seekwellpandas</cite> (SQL-pandas) is a simple Python package that provides extensions to query pandas DataFrames using a SQL-like synthax.</p>
 <section id="install">
 <h2>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h2>
-<p><cite>pip install seekwellpandas</cite>.</p>
+<p>You can install SeekwellPandas using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>seekwellpandas
+</pre></div>
+</div>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
-<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>python
-import pandas as pd
-import seekwellpandas</p>
-<p># Create a sample DataFrame
-df = pd.DataFrame({</p>
-<blockquote>
-<div><p>‘A’: [1, 2, 3, 4],
-‘B’: [‘a’, ‘b’, ‘a’, ‘b’],
-‘C’: [10, 20, 30, 40]</p>
-</div></blockquote>
-<p>})</p>
-<p># Select columns
-result = df.select(‘A’, ‘B’)
-<a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+<p>Here’s a basic example of how to use SeekwellPandas:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seekwellpandas</span>
+
+<span class="c1"># Create a sample DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="c1"># Select columns</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
+<p>SeekwellPandas extends pandas DataFrames with SQL-like methods, including:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">select()</span></code>: Select specific columns</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">where_()</span></code>: Filter rows based on a condition</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">group_by()</span></code>: Group data by one or more columns</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">order_by()</span></code>: Sort data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">join_()</span></code>: Join two DataFrames</p></li>
+<li><p>etc.</p></li>
+</ul>
+<p>For more methods and detailed information on each method, please refer to the full documentation.</p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h2>
+<p>This project is licensed under the GPLv3 License.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
