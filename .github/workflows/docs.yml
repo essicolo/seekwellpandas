@@ -30,8 +30,8 @@ jobs:
       run: |
         pwd
         ls -R
-        python -c "import pandalchemy; print(pandalchemy.__file__)"
-        python -c "from pandalchemy import methods; print(methods.__file__)"
+        python -c "import seekwellpandas; print(seekwellpandas.__file__)"
+        python -c "from seekwellpandas import methods; print(methods.__file__)"
 
     - name: Build Documentation
       run: |

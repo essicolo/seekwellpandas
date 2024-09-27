@@ -1,7 +1,7 @@
 API Reference
 =============
 
-.. automodule:: pandalchemy.methods
+.. automodule:: seekwellpandas.methods
    :members:
    :undoc-members:
    :show-inheritance:

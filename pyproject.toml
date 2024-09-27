@@ -3,7 +3,7 @@ requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pandalchemy"
+name = "seekwellpandas"
 dynamic = ["version"]
 authors = [
     {name = "Essi Parent", email = "9ivko1ozf@relay.firefox.com"},
@@ -22,13 +22,13 @@ dependencies = [
 ]
 
 [tool.setuptools_scm]
-write_to = "src/pandalchemy/_version.py"
+write_to = "src/seekwellpandas/_version.py"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["pandalchemy*"]
+include = ["seekwellpandas*"]
 namespaces = false
 
 [project.urls]
-"Homepage" = "https://github.com/essicolo/pandalchemy"
-"Bug Tracker" = "https://github.com/essicolo/pandalchemy/issues"
+"Homepage" = "https://github.com/essicolo/seekwellpandas"
+"Bug Tracker" = "https://github.com/essicolo/seekwellpandas/issues"
