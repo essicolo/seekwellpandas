@@ -10,7 +10,6 @@ from .methods import (
     distinct,
     intersect,
     difference,
-    create_view,
     with_column,
     rename_column,
     cast,
