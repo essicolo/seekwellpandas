@@ -32,3 +32,6 @@ namespaces = false
 [project.urls]
 "Homepage" = "https://github.com/essicolo/seekwellpandas"
 "Bug Tracker" = "https://github.com/essicolo/seekwellpandas/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "seekwellpandas.__version__"}

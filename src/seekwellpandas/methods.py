@@ -1,19 +1,60 @@
 import pandas as pd
 import pandas_flavor as pf
+import warnings
 
 @pf.register_dataframe_method
 def select(df, *columns):
     """
-    Select specific columns from the DataFrame.
+    Select specific columns from the DataFrame, including negative selection.
 
     Parameters:
     df (pd.DataFrame): The DataFrame to select columns from.
-    *columns (str): The columns to select.
+    *columns (str or list): The columns to select. Can be strings or lists.
+                            Prefix column names with '-' for negative selection.
 
     Returns:
     pd.DataFrame: A DataFrame with the selected columns.
     """
-    return df[list(columns)]
+    all_columns = set(df.columns)
+    selected_columns = set()
+    excluded_columns = set()
+
+    for col in columns:
+        if isinstance(col, list):
+            for item in col:
+                _process_column(item, all_columns, selected_columns, excluded_columns)
+        elif isinstance(col, str):
+            _process_column(col, all_columns, selected_columns, excluded_columns)
+
+    if selected_columns:
+        final_columns = selected_columns - excluded_columns
+    else:
+        final_columns = all_columns - excluded_columns
+
+    return df[list(final_columns)]
+
+def _process_column(col, all_columns, selected_columns, excluded_columns):
+    """
+    Internal method to process a single column for selection.
+
+    Parameters:
+    col (str): The column to process.
+    all_columns (set): A set of all columns in the DataFrame.
+    selected_columns (set): A set of columns to select.
+    excluded_columns (set): A set of columns to exclude.
+
+    Returns:
+    None
+
+    """
+    if col.startswith('-'):
+        col_name = col[1:]
+        excluded_columns.add(col_name)
+        if col in all_columns:
+            warnings.warn(f"Column '{col}' Already exists in the data frame. "
+                          f"Make sure that you meant to exclude '{col_name}', and not select '{col}'.")
+    else:
+        selected_columns.add(col)
 
 @pf.register_dataframe_method
 def where_(df, condition):
@@ -22,11 +63,13 @@ def where_(df, condition):
 
     Parameters:
     df (pd.DataFrame): The DataFrame to filter.
-    condition (str): The condition to filter by.
+    condition (str or list): The condition(s) to filter by. Can be a string or a list of strings.
 
     Returns:
     pd.DataFrame: A filtered DataFrame.
     """
+    if isinstance(condition, list):
+        condition = ' and '.join(f'({cond})' for cond in condition)
     return df.query(condition)
 
 @pf.register_dataframe_method
@@ -36,12 +79,18 @@ def group_by(df, *columns):
 
     Parameters:
     df (pd.DataFrame): The DataFrame to group.
-    *columns (str): The columns to group by.
+    *columns (str or list): The columns to group by. Can be strings or lists.
 
     Returns:
     pd.core.groupby.DataFrameGroupBy: A grouped DataFrame.
     """
-    return df.groupby(list(columns))
+    group_columns = []
+    for col in columns:
+        if isinstance(col, list):
+            group_columns.extend(col)
+        else:
+            group_columns.append(col)
+    return df.groupby(group_columns)
 
 @pf.register_dataframe_method
 def having(df, condition):
@@ -66,17 +115,27 @@ def having(df, condition):
 @pf.register_dataframe_method
 def order_by(df, column, ascending=True):
     """
-    Sort the DataFrame by a specific column.
+    Sort the DataFrame by specific columns.
 
     Parameters:
     df (pd.DataFrame): The DataFrame to sort.
-    column (str): The column to sort by.
-    ascending (bool): Whether to sort in ascending order. Default is True.
+    *columns (str or list): The columns to sort by. Can be strings or lists.
+    ascending (bool or list): Whether to sort in ascending order. Can be a single boolean or a list.
 
     Returns:
     pd.DataFrame: A sorted DataFrame.
     """
-    return df.sort_values(column, ascending=ascending)
+    sort_columns = []
+    for col in columns:
+        if isinstance(col, list):
+            sort_columns.extend(col)
+        else:
+            sort_columns.append(col)
+    
+    if isinstance(ascending, bool):
+        ascending = [ascending] * len(sort_columns)
+    
+    return df.sort_values(sort_columns, ascending=ascending)
 
 @pf.register_dataframe_method
 def limit(df, n):
@@ -162,21 +221,6 @@ def difference(df, other):
     pd.DataFrame: The difference between the two DataFrames.
     """
     return df[~df.apply(tuple, 1).isin(other.apply(tuple, 1))]
-
-@pf.register_dataframe_method
-def create_view(df, name):
-    """
-    Create a global view of the DataFrame.
-
-    Parameters:
-    df (pd.DataFrame): The DataFrame to create a view of.
-    name (str): The name of the view.
-
-    Returns:
-    pd.DataFrame: The original DataFrame.
-    """
-    globals()[name] = df
-    return df
 
 @pf.register_dataframe_method
 def with_column(df, name, expression):
