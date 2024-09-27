@@ -55,5 +55,6 @@ This project is licensed under the GPLv3 License.
    :maxdepth: 2
    :caption: Contents:
 
-   api
+   about
    _examples/basic-usage
+   api
