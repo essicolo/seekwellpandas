@@ -7,7 +7,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
@@ -31,10 +33,12 @@ jobs:
     - name: Check build output
       run: |
         ls -R docs/_build/html
-    - name: Clean Actions cache
-      run: |
-        rm -rf $GITHUB_WORKSPACE/.github/workflows/.cache
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
       with:
-        folder: docs/_build/html
+        path: 'docs/_build/html'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
