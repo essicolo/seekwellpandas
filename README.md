@@ -51,7 +51,7 @@ df = pd.DataFrame({
 result = df.select('A', 'B')
 
 # Negative selection
-result = df.select(-'A')
+result = df.select('-A')
 
 # Filter rows redirecting to .query() (the _ avoids overlapping with pandas.DataFrame.where)
 result = df.where_('A > 2')
