@@ -58,6 +58,21 @@ def _process_column(col, all_columns, selected_columns, excluded_columns):
         selected_columns.add(col)
 
 @pf.register_dataframe_method
+import pandas as pd
+import pandas_flavor as pf
+import re
+
+@pf.register_dataframe_method
+import pandas as pd
+import pandas_flavor as pf
+import re
+
+@pf.register_dataframe_method
+import pandas as pd
+import pandas_flavor as pf
+import re
+
+@pf.register_dataframe_method
 def where_(df, condition):
     """
     Filter the DataFrame based on SQL-like conditions.
@@ -71,35 +86,58 @@ def where_(df, condition):
     
     Examples:
     df.where_('column > 5')
-    df.where_('column in value1, value2, value3')
+    df.where_('column in Adelie, Gentoo, Chinstrap')
     df.where_('column1 == value and column2 > 10')
+    df.where_("sex == female and island == Torgersen")
+    df.where_("(species in Adelie, Gentoo) & (body_mass_g > 3000)")
+    df.where_("species not in Adelie or island == Torgersen")
     """
+    def parse_value(value):
+        if value.startswith("'") and value.endswith("'"):
+            return value
+        try:
+            return float(value) if '.' in value else int(value)
+        except ValueError:
+            return f"'{value}'"
+
+    def parse_in_condition(column, values):
+        parsed_values = [parse_value(v.strip()) for v in values.split(',')]
+        return f"{column}.isin([{', '.join(parsed_values)}])"
+
     def parse_condition(cond):
-        # Parse 'in' conditions
-        in_match = re.match(r'(\w+)\s+in\s+(.*)', cond)
+        # Handle 'in' and 'not in' conditions
+        in_match = re.match(r'(\w+)\s+(not\s+in|in)\s+(.*)', cond)
         if in_match:
-            column, values = in_match.groups()
-            values = [v.strip() for v in values.split(',')]
-            return f"{column}.isin({values})"
-        
-        # Parse other conditions
+            column, op, values = in_match.groups()
+            parsed = parse_in_condition(column, values)
+            return f"~({parsed})" if op == "not in" else parsed
+
+        # Handle other conditions
         ops = {'==': '==', '!=': '!=', '>': '>', '<': '<', '>=': '>=', '<=': '<='}
         for op in ops:
             if op in cond:
                 column, value = cond.split(op)
-                return f"{column.strip()} {ops[op]} {value.strip()}"
+                parsed_value = parse_value(value.strip())
+                return f"{column.strip()} {ops[op]} {parsed_value}"
         
         return cond
 
-    # Split the condition string into individual conditions
-    conditions = [c.strip() for c in re.split(r'\s+and\s+|\s+or\s+', condition)]
-    parsed_conditions = [parse_condition(c) for c in conditions]
-    
+    # Replace 'and', 'or' with '&', '|' respectively, but not inside parentheses
+    def replace_and_or(match):
+        if match.group(1) == 'and':
+            return '&'
+        elif match.group(1) == 'or':
+            return '|'
+
+    condition = re.sub(r'\b(and|or)\b(?![^(]*\))', replace_and_or, condition)
+
+    # Parse individual conditions
+    parsed_condition = re.split(r'(&|\|)', condition)
+    parsed_condition = [parse_condition(c.strip()) for c in parsed_condition]
+
     # Reconstruct the query string
-    query = re.sub(r'\s+and\s+|\s+or\s+', lambda m: m.group(0), condition)
-    for original, parsed in zip(conditions, parsed_conditions):
-        query = query.replace(original, parsed)
-    
+    query = ''.join(parsed_condition)
+
     return df.query(query)
 
 @pf.register_dataframe_method
