@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "seekwellpandas"
-version = "0.2.1"
+version = "0.2.2"
 authors = [
     {name = "Essi Parent", email = "9ivko1ozf@relay.firefox.com"},
 ]
