@@ -58,7 +58,7 @@ def _process_column(col, all_columns, selected_columns, excluded_columns):
         selected_columns.add(col)
 
 @pf.register_dataframe_method
-def where2_(df: DataFrame, condition: str) -> DataFrame:
+def where_(df, condition):
     """
     Filter the DataFrame based on SQL-like conditions.
     
