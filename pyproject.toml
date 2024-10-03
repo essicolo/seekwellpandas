@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "seekwellpandas"
-dynamic = ["version"]
+revision = 0.2
 authors = [
     {name = "Essi Parent", email = "9ivko1ozf@relay.firefox.com"},
 ]
@@ -20,6 +20,9 @@ dependencies = [
     "pandas>=2.0.0",
     "pandas-flavor>=0.3.0"
 ]
+
+[project.optional-dependencies]
+dev = ["bump-my-version", "marimo", "uv"]
 
 [tool.setuptools_scm]
 write_to = "src/seekwellpandas/_version.py"
