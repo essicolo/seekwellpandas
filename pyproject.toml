@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "seekwellpandas"
-revision = 0.2
+dynamic = ["version"]
 authors = [
     {name = "Essi Parent", email = "9ivko1ozf@relay.firefox.com"},
 ]
@@ -38,3 +38,22 @@ namespaces = false
 
 [tool.setuptools.dynamic]
 version = {attr = "seekwellpandas.__version__"}
+
+[tool.bump-my-version]
+current_version = "0.2"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message = "bump version: {current_version} → {new_version}"
+tag_message = "{new_version}"
+tag = true
+sign_tags = false
+
+[[tool.bump-my-version.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[[tool.bump-my-version.files]]
+filename = "seekwellpandas/__init__.py"
+search = '__version__ = "{current_version}"'
+replace = '__version__ = "{new_version}"'
+
