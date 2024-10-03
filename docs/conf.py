@@ -18,7 +18,6 @@ extensions = [
     'nbsphinx',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
-    'sphinx.ext.intersphinx', 
 ]
 
 # Configuration de base
@@ -31,9 +30,13 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # Thème et style
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'alabaster'
 html_static_path = ['_static']
 html_logo = '_static/logo.png'
+
+# Assurez-vous que ces chemins sont corrects
+source_dir = 'source'
+html_extra_path = ['_static']
 
 # Configuration supplémentaire
 autodoc_member_order = 'bysource'
