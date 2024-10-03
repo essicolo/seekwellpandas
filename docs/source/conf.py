@@ -16,8 +16,9 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'nbsphinx',
-    'sphinx.ext.viewcode',  # Ajoute des liens vers le code source
-    'sphinx.ext.githubpages',  # Support pour GitHub Pages
+    'sphinx.ext.viewcode',
+    'sphinx.ext.githubpages',
+    'sphinx.ext.intersphinx', 
 ]
 
 # Configuration de base
@@ -30,11 +31,11 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # Thème et style
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 html_logo = '_static/logo.png'
 
-# Configuration supplémentaire pour une meilleure documentation
+# Configuration supplémentaire
 autodoc_member_order = 'bysource'
 napoleon_google_docstring = True
 napoleon_numpy_docstring = True
@@ -47,3 +48,9 @@ napoleon_use_admonition_for_references = False
 napoleon_use_ivar = False
 napoleon_use_param = True
 napoleon_use_rtype = True
+
+# Configuration pour intersphinx
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'pandas': ('https://pandas.pydata.org/docs/', None),
+}

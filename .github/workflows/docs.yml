@@ -23,12 +23,18 @@ jobs:
         pip install .
         pip freeze
         sudo apt-get install pandoc
+    - name: Debug - List contents of docs directory
+      run: ls -R docs
     - name: Build Documentation
       run: |
         cd docs
         make html
         echo "Contents of _build/html directory:"
         ls -R _build/html
+      continue-on-error: true
+    - name: Debug - Check Sphinx build output
+      run: |
+        cat docs/_build/html/output.log
       continue-on-error: true
     - name: Check build output
       run: |
@@ -42,4 +48,3 @@ jobs:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v2
-      
