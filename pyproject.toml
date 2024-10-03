@@ -32,19 +32,3 @@ namespaces = false
 [project.urls]
 "Homepage" = "https://github.com/essicolo/seekwellpandas"
 "Bug Tracker" = "https://github.com/essicolo/seekwellpandas/issues"
-
-[tool.bump-my-version]
-current_version = "0.2.0"
-version_pattern = "MAJOR.MINOR.PATCH"
-commit = true
-tag = true
-
-[[tool.bump-my-version.files]]
-filename = "pyproject.toml"
-search = 'version = "{current_version}"'
-replace = 'version = "{new_version}"'
-
-[[tool.bump-my-version.files]]
-filename = "src/seekwellpandas/__init__.py"
-search = '__version__ = "{current_version}"'
-replace = '__version__ = "{new_version}"'
