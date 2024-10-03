@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "seekwellpandas"
-dynamic = ["version"]
+version = "0.2.0"  # Version statique
 authors = [
     {name = "Essi Parent", email = "9ivko1ozf@relay.firefox.com"},
 ]
@@ -24,9 +24,6 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["bump-my-version", "marimo", "uv"]
 
-[tool.setuptools_scm]
-write_to = "src/seekwellpandas/_version.py"
-
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["seekwellpandas*"]
@@ -36,11 +33,8 @@ namespaces = false
 "Homepage" = "https://github.com/essicolo/seekwellpandas"
 "Bug Tracker" = "https://github.com/essicolo/seekwellpandas/issues"
 
-[tool.setuptools.dynamic]
-version = {attr = "seekwellpandas.__version__"}
-
 [tool.bump-my-version]
-current_version = "0.2"
+current_version = "0.2.0"
 version_pattern = "MAJOR.MINOR.PATCH"
 commit_message = "bump version: {current_version} → {new_version}"
 tag_message = "{new_version}"
@@ -53,7 +47,6 @@ search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
 
 [[tool.bump-my-version.files]]
-filename = "seekwellpandas/__init__.py"
+filename = "src/seekwellpandas/__init__.py"
 search = '__version__ = "{current_version}"'
 replace = '__version__ = "{new_version}"'
-
