@@ -56,5 +56,5 @@ This project is licensed under the GPLv3 License.
    :caption: Contents:
 
    about
-   _examples/basic-usage
+   basic-usage
    api

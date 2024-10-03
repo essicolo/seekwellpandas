@@ -1,3 +1,4 @@
+import re
 import pandas as pd
 import pandas_flavor as pf
 import warnings
@@ -57,20 +58,49 @@ def _process_column(col, all_columns, selected_columns, excluded_columns):
         selected_columns.add(col)
 
 @pf.register_dataframe_method
-def where_(df, condition):
+def where2_(df: DataFrame, condition: str) -> DataFrame:
     """
-    Filter the DataFrame based on a condition.
-
+    Filter the DataFrame based on SQL-like conditions.
+    
     Parameters:
     df (pd.DataFrame): The DataFrame to filter.
-    condition (str or list): The condition(s) to filter by. Can be a string or a list of strings.
-
+    condition (str): A string representing the condition in SQL-like syntax.
+    
     Returns:
     pd.DataFrame: A filtered DataFrame.
+    
+    Examples:
+    df.where_('column > 5')
+    df.where_('column in value1, value2, value3')
+    df.where_('column1 == value and column2 > 10')
     """
-    if isinstance(condition, list):
-        condition = ' and '.join(f'({cond})' for cond in condition)
-    return df.query(condition)
+    def parse_condition(cond):
+        # Parse 'in' conditions
+        in_match = re.match(r'(\w+)\s+in\s+(.*)', cond)
+        if in_match:
+            column, values = in_match.groups()
+            values = [v.strip() for v in values.split(',')]
+            return f"{column}.isin({values})"
+        
+        # Parse other conditions
+        ops = {'==': '==', '!=': '!=', '>': '>', '<': '<', '>=': '>=', '<=': '<='}
+        for op in ops:
+            if op in cond:
+                column, value = cond.split(op)
+                return f"{column.strip()} {ops[op]} {value.strip()}"
+        
+        return cond
+
+    # Split the condition string into individual conditions
+    conditions = [c.strip() for c in re.split(r'\s+and\s+|\s+or\s+', condition)]
+    parsed_conditions = [parse_condition(c) for c in conditions]
+    
+    # Reconstruct the query string
+    query = re.sub(r'\s+and\s+|\s+or\s+', lambda m: m.group(0), condition)
+    for original, parsed in zip(conditions, parsed_conditions):
+        query = query.replace(original, parsed)
+    
+    return df.query(query)
 
 @pf.register_dataframe_method
 def group_by(df, *columns):
