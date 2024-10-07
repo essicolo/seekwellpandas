@@ -57,15 +57,10 @@ def _process_column(col, all_columns, selected_columns, excluded_columns):
     else:
         selected_columns.add(col)
 
-import re
-import pandas as pd
-import numpy as np
-import pandas_flavor as pf
-
 @pf.register_dataframe_method
 def where_(df, condition):
     """
-    Filter the DataFrame based on SQL-like conditions.
+    Filter the DataFrame based on a condition.
 
     Parameters:
     df (pd.DataFrame): The DataFrame to filter.
@@ -75,22 +70,22 @@ def where_(df, condition):
     pd.DataFrame: A filtered DataFrame.
 
     Examples:
-    df.where_('column > 5')
-    df.where_('column in Adelie, Gentoo, Chinstrap')
-    df.where_('column1 == value and column2 > 10')
-    df.where_("sex == female and island == Dream")
-    df.where_("(species in Adelie, Gentoo) & (body_mass_g > 3000)")
-    df.where_("species not in Adelie or island == Torgersen")
-    df.where_("year >= 2008")
+    df.where_('A > 5')
+    df.where_('A in value1, value2, value3')
+    df.where_('A == value and B > 10')
+    df.where_('A in value1, value2 or B == value3 and C <= 10')
     """
+
     def parse_value(column, value):
+
         value = value.strip()
         column_dtype = df[column].dtype
         if pd.api.types.is_numeric_dtype(column_dtype):
             try:
-                return pd.to_numeric(value)
+                parsed_value = float(value)
+                return parsed_value
             except ValueError:
-                return np.nan
+                return pd.NA
         elif pd.api.types.is_datetime64_any_dtype(column_dtype):
             try:
                 return pd.to_datetime(value)
@@ -101,27 +96,25 @@ def where_(df, condition):
 
     def parse_in_condition(column, values):
         parsed_values = [parse_value(column, v.strip()) for v in values.split(',')]
-        return df[column].isin(parsed_values)
+        result = df[column].isin(parsed_values)
+        return result
 
     def parse_condition(cond):
-        # Handle 'in' and 'not in' conditions
         in_match = re.match(r'(\w+)\s+(not\s+in|in)\s+(.*)', cond)
         if in_match:
             column, op, values = in_match.groups()
             result = parse_in_condition(column, values)
             return ~result if op == "not in" else result
 
-        # Handle other conditions
         ops = {
-            '==': lambda col, val: df[col] == parse_value(col, val),
-            '!=': lambda col, val: df[col] != parse_value(col, val),
-            '>': lambda col, val: df[col] > parse_value(col, val),
-            '<': lambda col, val: df[col] < parse_value(col, val),
-            '>=': lambda col, val: df[col] >= parse_value(col, val),
-            '<=': lambda col, val: df[col] <= parse_value(col, val)
+            '==': lambda x, y: x == y,
+            '!=': lambda x, y: x != y,
+            '>=': lambda x, y: x >= y,
+            '<=': lambda x, y: x <= y,
+            '>': lambda x, y: x > y,
+            '<': lambda x, y: x < y
         }
-
-        for op in ops:
+        for op in sorted(ops.keys(), key=len, reverse=True):
             if op in cond:
                 column, value = cond.split(op)
                 column = column.strip()
@@ -129,15 +122,14 @@ def where_(df, condition):
                 parsed_value = parse_value(column, value)
                 if pd.isna(parsed_value):
                     return pd.Series(False, index=df.index)
-                return ops[op](column, value)
-
+                result = ops[op](df[column], parsed_value)
+                return result
+        
         return pd.Series(True, index=df.index)
 
-    # Split the condition into individual parts
     condition_parts = re.split(r'\s+and\s+|\s+or\s+', condition)
     parsed_conditions = [parse_condition(part) for part in condition_parts]
 
-    # Combine the conditions
     final_condition = parsed_conditions[0]
     for i, part in enumerate(re.findall(r'\s+(and|or)\s+', condition)):
         if part == 'and':
@@ -145,7 +137,8 @@ def where_(df, condition):
         else:  # 'or'
             final_condition = final_condition | parsed_conditions[i+1]
 
-    return df[final_condition]
+    result = df[final_condition]
+    return result
 
 @pf.register_dataframe_method
 def group_by(df, *columns):
