@@ -58,21 +58,6 @@ def _process_column(col, all_columns, selected_columns, excluded_columns):
         selected_columns.add(col)
 
 @pf.register_dataframe_method
-import pandas as pd
-import pandas_flavor as pf
-import re
-
-@pf.register_dataframe_method
-import pandas as pd
-import pandas_flavor as pf
-import re
-
-@pf.register_dataframe_method
-import pandas as pd
-import pandas_flavor as pf
-import re
-
-@pf.register_dataframe_method
 def where_(df, condition):
     """
     Filter the DataFrame based on SQL-like conditions.
@@ -88,21 +73,24 @@ def where_(df, condition):
     df.where_('column > 5')
     df.where_('column in Adelie, Gentoo, Chinstrap')
     df.where_('column1 == value and column2 > 10')
-    df.where_("sex == female and island == Torgersen")
+    df.where_("sex == female and island == Dream")
     df.where_("(species in Adelie, Gentoo) & (body_mass_g > 3000)")
     df.where_("species not in Adelie or island == Torgersen")
     """
     def parse_value(value):
+        # Check if the value is already a string literal
         if value.startswith("'") and value.endswith("'"):
             return value
+        # Try to convert to float or int
         try:
             return float(value) if '.' in value else int(value)
         except ValueError:
+            # If conversion fails, treat as string and add quotes
             return f"'{value}'"
 
     def parse_in_condition(column, values):
         parsed_values = [parse_value(v.strip()) for v in values.split(',')]
-        return f"{column}.isin([{', '.join(parsed_values)}])"
+        return f"{column}.isin([{', '.join(map(str, parsed_values))}])"
 
     def parse_condition(cond):
         # Handle 'in' and 'not in' conditions
