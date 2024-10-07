@@ -61,36 +61,33 @@ def _process_column(col, all_columns, selected_columns, excluded_columns):
 def where_(df, condition):
     """
     Filter the DataFrame based on SQL-like conditions.
-    
+
     Parameters:
     df (pd.DataFrame): The DataFrame to filter.
     condition (str): A string representing the condition in SQL-like syntax.
-    
+
     Returns:
     pd.DataFrame: A filtered DataFrame.
-    
+
     Examples:
     df.where_('column > 5')
     df.where_('column in Adelie, Gentoo, Chinstrap')
     df.where_('column1 == value and column2 > 10')
-    df.where_("sex == female and island == Dream")
+    df.where_("sex == female and island == Torgersen")
     df.where_("(species in Adelie, Gentoo) & (body_mass_g > 3000)")
     df.where_("species not in Adelie or island == Torgersen")
     """
     def parse_value(value):
-        # Check if the value is already a string literal
         if value.startswith("'") and value.endswith("'"):
             return value
-        # Try to convert to float or int
         try:
             return float(value) if '.' in value else int(value)
         except ValueError:
-            # If conversion fails, treat as string and add quotes
             return f"'{value}'"
 
     def parse_in_condition(column, values):
         parsed_values = [parse_value(v.strip()) for v in values.split(',')]
-        return f"{column}.isin([{', '.join(map(str, parsed_values))}])"
+        return f"{column}.isin([{', '.join(parsed_values)}])"
 
     def parse_condition(cond):
         # Handle 'in' and 'not in' conditions
@@ -107,7 +104,7 @@ def where_(df, condition):
                 column, value = cond.split(op)
                 parsed_value = parse_value(value.strip())
                 return f"{column.strip()} {ops[op]} {parsed_value}"
-        
+
         return cond
 
     # Replace 'and', 'or' with '&', '|' respectively, but not inside parentheses
