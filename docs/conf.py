@@ -9,7 +9,7 @@ print("Python path:", sys.path)
 project = 'seekwellpandas'
 copyright = '2024, Essi Parent'
 author = 'Essi Parent'
-release = '0.2.3'
+release = '0.2.4'
 
 # Extensions Sphinx
 extensions = [
