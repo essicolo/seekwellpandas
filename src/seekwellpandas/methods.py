@@ -57,6 +57,11 @@ def _process_column(col, all_columns, selected_columns, excluded_columns):
     else:
         selected_columns.add(col)
 
+import re
+import pandas as pd
+import numpy as np
+import pandas_flavor as pf
+
 @pf.register_dataframe_method
 def where_(df, condition):
     """
@@ -73,57 +78,74 @@ def where_(df, condition):
     df.where_('column > 5')
     df.where_('column in Adelie, Gentoo, Chinstrap')
     df.where_('column1 == value and column2 > 10')
-    df.where_("sex == female and island == Torgersen")
+    df.where_("sex == female and island == Dream")
     df.where_("(species in Adelie, Gentoo) & (body_mass_g > 3000)")
     df.where_("species not in Adelie or island == Torgersen")
+    df.where_("year >= 2008")
     """
-    def parse_value(value):
-        if value.startswith("'") and value.endswith("'"):
-            return value
-        try:
-            return float(value) if '.' in value else int(value)
-        except ValueError:
-            return f"'{value}'"
+    def parse_value(column, value):
+        value = value.strip()
+        column_dtype = df[column].dtype
+        if pd.api.types.is_numeric_dtype(column_dtype):
+            try:
+                return pd.to_numeric(value)
+            except ValueError:
+                return np.nan
+        elif pd.api.types.is_datetime64_any_dtype(column_dtype):
+            try:
+                return pd.to_datetime(value)
+            except ValueError:
+                return pd.NaT
+        else:
+            return value.strip("'\"")
 
     def parse_in_condition(column, values):
-        parsed_values = [parse_value(v.strip()) for v in values.split(',')]
-        return f"{column}.isin([{', '.join(parsed_values)}])"
+        parsed_values = [parse_value(column, v.strip()) for v in values.split(',')]
+        return df[column].isin(parsed_values)
 
     def parse_condition(cond):
         # Handle 'in' and 'not in' conditions
         in_match = re.match(r'(\w+)\s+(not\s+in|in)\s+(.*)', cond)
         if in_match:
             column, op, values = in_match.groups()
-            parsed = parse_in_condition(column, values)
-            return f"~({parsed})" if op == "not in" else parsed
+            result = parse_in_condition(column, values)
+            return ~result if op == "not in" else result
 
         # Handle other conditions
-        ops = {'==': '==', '!=': '!=', '>': '>', '<': '<', '>=': '>=', '<=': '<='}
+        ops = {
+            '==': lambda col, val: df[col] == parse_value(col, val),
+            '!=': lambda col, val: df[col] != parse_value(col, val),
+            '>': lambda col, val: df[col] > parse_value(col, val),
+            '<': lambda col, val: df[col] < parse_value(col, val),
+            '>=': lambda col, val: df[col] >= parse_value(col, val),
+            '<=': lambda col, val: df[col] <= parse_value(col, val)
+        }
+
         for op in ops:
             if op in cond:
                 column, value = cond.split(op)
-                parsed_value = parse_value(value.strip())
-                return f"{column.strip()} {ops[op]} {parsed_value}"
+                column = column.strip()
+                value = value.strip()
+                parsed_value = parse_value(column, value)
+                if pd.isna(parsed_value):
+                    return pd.Series(False, index=df.index)
+                return ops[op](column, value)
 
-        return cond
+        return pd.Series(True, index=df.index)
 
-    # Replace 'and', 'or' with '&', '|' respectively, but not inside parentheses
-    def replace_and_or(match):
-        if match.group(1) == 'and':
-            return '&'
-        elif match.group(1) == 'or':
-            return '|'
+    # Split the condition into individual parts
+    condition_parts = re.split(r'\s+and\s+|\s+or\s+', condition)
+    parsed_conditions = [parse_condition(part) for part in condition_parts]
 
-    condition = re.sub(r'\b(and|or)\b(?![^(]*\))', replace_and_or, condition)
+    # Combine the conditions
+    final_condition = parsed_conditions[0]
+    for i, part in enumerate(re.findall(r'\s+(and|or)\s+', condition)):
+        if part == 'and':
+            final_condition = final_condition & parsed_conditions[i+1]
+        else:  # 'or'
+            final_condition = final_condition | parsed_conditions[i+1]
 
-    # Parse individual conditions
-    parsed_condition = re.split(r'(&|\|)', condition)
-    parsed_condition = [parse_condition(c.strip()) for c in parsed_condition]
-
-    # Reconstruct the query string
-    query = ''.join(parsed_condition)
-
-    return df.query(query)
+    return df[final_condition]
 
 @pf.register_dataframe_method
 def group_by(df, *columns):
