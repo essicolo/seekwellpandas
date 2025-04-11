@@ -30,18 +30,18 @@ Here's a basic example of how to use SeekwellPandas:
     })
 
     # Select columns
-    result = df.select('A', 'B')
+    result = df.SELECT('A', 'B')
 
 Features
 --------
 
 SeekwellPandas extends pandas DataFrames with SQL-like methods, including:
 
-- ``select()``: Select specific columns
-- ``where_()``: Filter rows based on a condition
-- ``group_by()``: Group data by one or more columns
-- ``order_by()``: Sort data
-- ``join_()``: Join two DataFrames
+- ``SELECT()``: Select specific columns
+- ``WHERE_()``: Filter rows based on a condition
+- ``GROUP_BY()``: Group data by one or more columns
+- ``ORDER_BY()``: Sort data
+- ``JOIN()``: Join two DataFrames
 - etc.
 
 For more methods and detailed information on each method, please refer to the full documentation.
@@ -57,4 +57,5 @@ This project is licensed under the GPLv3 License.
 
    source/about
    source/basic-usage
+   source/advanced-usage
    source/api
