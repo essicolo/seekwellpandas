@@ -13,7 +13,8 @@ permissions:
   pages: write
   id-token: write
 
-jobs:  deploy:
+jobs:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -60,18 +61,13 @@ jobs:  deploy:
     - name: Build documentation
       run: |
         cd docs
-        make html
-        
-    # Upload GitHub Pages artifact
+        make html 
+          # Upload GitHub Pages artifact
     - name: Upload GitHub Pages artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: docs/_build/html
-        name: github-pages
         
     # Deploy to GitHub Pages
     - name: Deploy to GitHub Pages
       uses: actions/deploy-pages@v2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        artifact_name: github-pages
