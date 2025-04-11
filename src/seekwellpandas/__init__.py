@@ -7,4 +7,4 @@ from .miscellaneous import *
 from .selection import *
 from .sorting import *
 
-__version__ = "0.2.6"
+__version__ = "1.0.0"
