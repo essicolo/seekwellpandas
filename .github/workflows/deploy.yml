@@ -54,10 +54,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create v${{ steps.get_version.outputs.VERSION }} \
-            --title "Release ${{ steps.get_version.outputs.VERSION }}" \
-            --notes "Release notes for version ${{ steps.get_version.outputs.VERSION }}" \
-            ./dist/*
+          # Check if release already exists
+          if gh release view v${{ steps.get_version.outputs.VERSION }} >/dev/null 2>&1; then
+            echo "Release v${{ steps.get_version.outputs.VERSION }} already exists, skipping creation"
+          else
+            echo "Creating release v${{ steps.get_version.outputs.VERSION }}"
+            gh release create v${{ steps.get_version.outputs.VERSION }} \
+              --title "Release ${{ steps.get_version.outputs.VERSION }}" \
+              --notes "Release notes for version ${{ steps.get_version.outputs.VERSION }}" \
+              ./dist/*
+          fi
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
       # Setup Pages
