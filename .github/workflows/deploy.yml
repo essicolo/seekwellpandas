@@ -42,7 +42,14 @@ jobs:
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-        run: twine upload dist/*
+        run: |
+          # Check if version already exists on PyPI
+          if pip index versions seekwellpandas 2>/dev/null | grep -q "${{ steps.get_version.outputs.VERSION }}"; then
+            echo "Version ${{ steps.get_version.outputs.VERSION }} already exists on PyPI, skipping upload"
+          else
+            echo "Uploading version ${{ steps.get_version.outputs.VERSION }} to PyPI"
+            twine upload dist/*
+          fi
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
