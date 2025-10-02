@@ -127,9 +127,9 @@ def select(df, *columns):
     return SELECT(df, *columns)
 
 @pf.register_dataframe_method
-def where(df, condition):
-    """Lowercase alias for WHERE method."""
-    from .methods import WHERE
+def where_(df, condition):
+    """Lowercase alias for WHERE method (underscore to avoid pandas conflict)."""
+    from .filtering import WHERE
     return WHERE(df, condition)
 
 @pf.register_dataframe_method
@@ -155,7 +155,7 @@ def _register_groupby_aliases():
     """Register lowercase aliases for GroupBy methods."""
     # Need to first import the aggregate module to ensure GroupBy methods are registered
     from . import aggregate
-    
+
     # Create a mapping of uppercase method names to their lowercase aliases
     method_map = {
         'COUNT': 'count_',
@@ -164,19 +164,89 @@ def _register_groupby_aliases():
         'MIN': 'min_',
         'MAX': 'max_'
     }
-    
+
     # Register each lowercase alias as a GroupBy method
     for upper_name, lower_name in method_map.items():
         if hasattr(pd.core.groupby.GroupBy, upper_name):
             original_method = getattr(pd.core.groupby.GroupBy, upper_name)
-            
+
             @wraps(original_method)
             def create_wrapped(upper_method=original_method):
                 def wrapped_method(*args, **kwargs):
                     return upper_method(*args, **kwargs)
                 return wrapped_method
-            
+
             setattr(pd.core.groupby.GroupBy, lower_name, create_wrapped())
+
+# Window functions aliases
+@pf.register_dataframe_method
+def row_number(df, partition_by=None, order_by=None, ascending=True):
+    """Lowercase alias for ROW_NUMBER method."""
+    from .window_functions import ROW_NUMBER
+    return ROW_NUMBER(df, partition_by, order_by, ascending)
+
+@pf.register_dataframe_method
+def rank_(df, order_by, partition_by=None, ascending=False, method='min'):
+    """Lowercase alias for RANK method (underscore to avoid pandas conflict)."""
+    from .window_functions import RANK
+    return RANK(df, order_by, partition_by, ascending, method)
+
+@pf.register_dataframe_method
+def dense_rank(df, order_by, partition_by=None, ascending=False):
+    """Lowercase alias for DENSE_RANK method."""
+    from .window_functions import DENSE_RANK
+    return DENSE_RANK(df, order_by, partition_by, ascending)
+
+@pf.register_dataframe_method
+def lag(df, column, partition_by=None, order_by=None, periods=1, fill_value=None):
+    """Lowercase alias for LAG method."""
+    from .window_functions import LAG
+    return LAG(df, column, partition_by, order_by, periods, fill_value)
+
+@pf.register_dataframe_method
+def lead(df, column, partition_by=None, order_by=None, periods=1, fill_value=None):
+    """Lowercase alias for LEAD method."""
+    from .window_functions import LEAD
+    return LEAD(df, column, partition_by, order_by, periods, fill_value)
+
+# Conditional logic aliases
+@pf.register_dataframe_method
+def case(df):
+    """Lowercase alias for CASE method."""
+    from .conditional import CASE
+    return CASE(df)
+
+@pf.register_dataframe_method
+def if_then(df, condition, true_value, false_value, column_name):
+    """Lowercase alias for IF method."""
+    from .conditional import IF
+    return IF(df, condition, true_value, false_value, column_name)
+
+# Enhanced JOIN aliases
+@pf.register_dataframe_method
+def left_join(df, other, on=None, left_on=None, right_on=None, suffixes=('_x', '_y')):
+    """Lowercase alias for LEFT_JOIN method."""
+    from .joins import LEFT_JOIN
+    return LEFT_JOIN(df, other, on, left_on, right_on, suffixes)
+
+@pf.register_dataframe_method
+def right_join(df, other, on=None, left_on=None, right_on=None, suffixes=('_x', '_y')):
+    """Lowercase alias for RIGHT_JOIN method."""
+    from .joins import RIGHT_JOIN
+    return RIGHT_JOIN(df, other, on, left_on, right_on, suffixes)
+
+@pf.register_dataframe_method
+def full_join(df, other, on=None, left_on=None, right_on=None, suffixes=('_x', '_y')):
+    """Lowercase alias for FULL_JOIN method."""
+    from .joins import FULL_JOIN
+    return FULL_JOIN(df, other, on, left_on, right_on, suffixes)
+
+# Pivot alias
+@pf.register_dataframe_method
+def pivot_(df, index=None, columns=None, values=None, aggfunc='mean', fill_value=None):
+    """Lowercase alias for PIVOT method (underscore to avoid pandas conflict)."""
+    from .miscellaneous import PIVOT
+    return PIVOT(df, index, columns, values, aggfunc, fill_value)
 
 # Call this function to register the GroupBy aliases
 _register_groupby_aliases()
