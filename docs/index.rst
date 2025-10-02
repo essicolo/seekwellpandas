@@ -1,5 +1,5 @@
 Welcome to seekwellpandas's documentation!
-=======================================
+============================================
 
 🐼🔬 Seek well, pandas! `seekwellpandas` (SQL-pandas) is a simple Python package that provides extensions to query pandas DataFrames using a SQL-like synthax.
 

@@ -60,15 +60,15 @@ jobs:
       - name: Build documentation
         run: |
           cd docs
-          # Fix potential source directory issues
-          python -c "import os; print('Current directory:', os.getcwd()); print('Directory contents:', os.listdir('.'))"
+          # Install Pandoc for Jupyter notebook conversion
+          sudo apt-get update
+          sudo apt-get install -y pandoc
           # Install needed documentation dependencies explicitly
-          pip install sphinx sphinx-rtd-theme nbsphinx
+          pip install sphinx sphinx-rtd-theme nbsphinx jupyter
           # Build docs with sphinx-build directly to ensure correct paths
           sphinx-build -b html . _build/html
-          # Debug - check what files were created
+          # Check what files were created
           ls -la _build/html || echo "No _build/html directory found"
-          ls -la || echo "Listing docs directory content"
             # Upload GitHub Pages artifact
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
