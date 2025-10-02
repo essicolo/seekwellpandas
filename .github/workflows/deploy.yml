@@ -21,60 +21,60 @@ jobs:
       pages: write
       id-token: write
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install build twine sphinx nbsphinx sphinx-rtd-theme
-        pip install -e .
-    - name: Extract version
-      id: get_version
-      run: |
-        version=$(python -c "import sys; sys.path.append('src'); from seekwellpandas import __version__; print(__version__)")
-        echo "VERSION=$version" >> $GITHUB_OUTPUT
-    - name: Build package
-      run: python -m build
-    - name: Publish package to PyPI
-      env:
-        TWINE_USERNAME: personnal
-        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-      run: twine upload dist/*
-    - name: Create GitHub Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        gh release create v${{ steps.get_version.outputs.VERSION }} \
-          --title "Release ${{ steps.get_version.outputs.VERSION }}" \
-          --notes "Release notes for version ${{ steps.get_version.outputs.VERSION }}" \
-          ./dist/*
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    
-    # Setup Pages
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-    # Build documentation
-    - name: Build documentation
-      run: |
-        cd docs
-        # Fix potential source directory issues
-        python -c "import os; print('Current directory:', os.getcwd()); print('Directory contents:', os.listdir('.'))"
-        # Install needed documentation dependencies explicitly
-        pip install sphinx sphinx-rtd-theme nbsphinx 
-        # Build docs with sphinx-build directly to ensure correct paths
-        sphinx-build -b html . _build/html
-        # Debug - check what files were created
-        ls -la _build/html || echo "No _build/html directory found"
-        ls -la || echo "Listing docs directory content"
-          # Upload GitHub Pages artifact
-    - name: Upload GitHub Pages artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: docs/_build/html
-        
-    # Deploy to GitHub Pages
-    - name: Deploy to GitHub Pages
-      uses: actions/deploy-pages@v2
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine sphinx nbsphinx sphinx-rtd-theme
+          pip install -e .
+      - name: Extract version
+        id: get_version
+        run: |
+          version=$(python -c "import sys; sys.path.append('src'); from seekwellpandas import __version__; print(__version__)")
+          echo "VERSION=$version" >> $GITHUB_OUTPUT
+      - name: Build package
+        run: python -m build
+      - name: Publish package to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: twine upload dist/*
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v${{ steps.get_version.outputs.VERSION }} \
+            --title "Release ${{ steps.get_version.outputs.VERSION }}" \
+            --notes "Release notes for version ${{ steps.get_version.outputs.VERSION }}" \
+            ./dist/*
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+      # Setup Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      # Build documentation
+      - name: Build documentation
+        run: |
+          cd docs
+          # Fix potential source directory issues
+          python -c "import os; print('Current directory:', os.getcwd()); print('Directory contents:', os.listdir('.'))"
+          # Install needed documentation dependencies explicitly
+          pip install sphinx sphinx-rtd-theme nbsphinx
+          # Build docs with sphinx-build directly to ensure correct paths
+          sphinx-build -b html . _build/html
+          # Debug - check what files were created
+          ls -la _build/html || echo "No _build/html directory found"
+          ls -la || echo "Listing docs directory content"
+            # Upload GitHub Pages artifact
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/_build/html
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
