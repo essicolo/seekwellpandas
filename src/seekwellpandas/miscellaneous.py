@@ -211,3 +211,43 @@ def INSERT(df, new_rows):
     df.insert(new_data)
     """
     return pd.concat([df, new_rows], ignore_index=True)
+
+@pf.register_dataframe_method
+def PIVOT(df, index=None, columns=None, values=None, aggfunc='mean', fill_value=None):
+    """
+    Pivot the DataFrame from long to wide format, similar to SQL PIVOT.
+
+    Parameters:
+    df (pd.DataFrame): The DataFrame to pivot.
+    index (str or list, optional): Column(s) to use as row identifiers.
+    columns (str or list): Column(s) to use as new column headers.
+    values (str or list, optional): Column(s) to aggregate.
+    aggfunc (str or function): Aggregation function to use. Default is 'mean'.
+    fill_value: Value to use for missing data. Default is None.
+
+    Returns:
+    pd.DataFrame: The pivoted DataFrame.
+
+    Examples:
+    df.PIVOT(index='date', columns='product', values='sales')
+    """
+    if values is None:
+        # If no values specified, use all numeric columns
+        numeric_cols = df.select_dtypes(include=[pd.api.types.is_numeric_dtype]).columns
+        if index is not None:
+            if isinstance(index, str):
+                index = [index]
+            numeric_cols = numeric_cols.difference(index)
+        if columns is not None:
+            if isinstance(columns, str):
+                columns = [columns]
+            numeric_cols = numeric_cols.difference(columns)
+        values = numeric_cols.tolist()
+
+    return df.pivot_table(
+        index=index,
+        columns=columns,
+        values=values,
+        aggfunc=aggfunc,
+        fill_value=fill_value
+    )
